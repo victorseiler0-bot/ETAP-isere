@@ -166,7 +166,7 @@ export default function App() {
 
   return (
     <div id="top" className="min-h-screen">
-      {/* HEADER - Glassmorphism "Goutte d'eau" effect */}
+      {/* HEADER - Glassmorphism effect */}
       <header className="sticky top-0 bg-white/40 backdrop-blur-xl z-[1000] border-b border-white/20 py-5 shadow-[0_4px_30px_rgba(0,0,0,0.03)]">
         <div className="w-[90%] max-w-[1100px] mx-auto flex justify-between items-center">
           <a
