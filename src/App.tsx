@@ -305,14 +305,16 @@ export default function App() {
         {/* DETAILS APPROCHE */}
         <section
           id="approche"
-          className="relative min-h-screen flex items-center py-[30vh] overflow-hidden"
+          className="relative min-h-[80vh] flex items-center py-20 overflow-visible"
         >
-          {/* Background Decorative Logo - Intensité augmentée */}
-          <img
-            src="https://static.wixstatic.com/media/6c836c_7847ce0df2334cdaaa5a47c2ae6f7ddc~mv2.png/v1/fill/w_578,h_720,al_c,lg_1,q_90,enc_avif,quality_auto/6c836c_7847ce0df2334cdaaa5a47c2ae6f7ddc~mv2.png"
-            alt="Logo décoratif ETAP"
-            className="absolute w-[400px] h-[400px] md:w-[600px] md:h-[600px] top-[10%] -right-[150px] md:-right-[250px] opacity-[0.08] saturate-[1.2] object-contain pointer-events-none transform rotate-12 drop-shadow-2xl"
-          />
+          {/* Background Decorative Logo - Positionné pour ne pas être coupé */}
+          <div className="absolute top-1/2 -translate-y-1/2 -right-[100px] md:-right-[150px] z-0 pointer-events-none">
+            <img
+              src="https://static.wixstatic.com/media/6c836c_7847ce0df2334cdaaa5a47c2ae6f7ddc~mv2.png/v1/fill/w_578,h_720,al_c,lg_1,q_90,enc_avif,quality_auto/6c836c_7847ce0df2334cdaaa5a47c2ae6f7ddc~mv2.png"
+              alt="Logo décoratif ETAP"
+              className="w-[350px] h-[350px] md:w-[500px] md:h-[500px] opacity-[0.08] saturate-[1.2] object-contain transform rotate-12 drop-shadow-2xl"
+            />
+          </div>
           <div className="w-[90%] max-w-[1100px] mx-auto relative z-10">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-16 relative pointer-events-auto">
               <div className="bg-white p-12 border border-borderColor rounded shadow-[0_4px_10px_rgba(30,58,138,0.05)]">
