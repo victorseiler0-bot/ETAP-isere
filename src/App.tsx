@@ -259,11 +259,11 @@ export default function App() {
           id="citation"
           className="relative py-[40vh] flex items-center overflow-visible"
         >
-          {/* Spline 3D Scene - Conteneur élargi pour éviter toute coupure du bras */}
+          {/* Spline 3D Scene - Fixe pour éviter les saccades */}
           <div className="absolute top-0 bottom-0 -right-[20%] w-[120%] lg:w-[100%] z-0 pointer-events-auto">
             <SplineScene
               scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
-              className="w-full h-full transform translate-x-0 transition-transform duration-1000"
+              className="w-full h-full"
             />
           </div>
 
