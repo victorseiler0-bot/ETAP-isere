@@ -166,8 +166,8 @@ export default function App() {
 
   return (
     <div id="top" className="min-h-screen">
-      {/* HEADER - Glassmorphism effect */}
-      <header className="sticky top-0 bg-white/40 backdrop-blur-xl z-[1000] border-b border-white/20 py-5 shadow-[0_4px_30px_rgba(0,0,0,0.03)]">
+      {/* HEADER - Glassmorphism ultra-accentué */}
+      <header className="sticky top-0 bg-white/20 backdrop-blur-[40px] z-[1000] border-b border-white/40 py-4 shadow-[0_8px_32px_0_rgba(31,38,135,0.07)]">
         <div className="w-[90%] max-w-[1100px] mx-auto flex justify-between items-center">
           <a
             href="#top"
@@ -321,8 +321,8 @@ export default function App() {
 
         {/* ESPACES & EQUIPE ENVELOPED IN INFINITE GRID */}
         <div className="relative">
-          {/* Transition dégradée raccourcie (plus nette) */}
-          <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-white to-transparent z-20 pointer-events-none" />
+          {/* Transition symétrique et unifiée (suppression de la coupure) */}
+          <div className="absolute inset-0 z-20 pointer-events-none shadow-[inset_0_100px_100px_-50px_#fff,inset_0_-100px_100px_-50px_#fff]" />
 
           <InfiniteGrid className="items-stretch justify-start py-0 min-h-0">
             {/* ESPACES */}
@@ -512,9 +512,6 @@ export default function App() {
               </div>
             </section>
           </InfiniteGrid>
-
-          {/* Effet symétrique en bas : transition vers le blanc avant le footer sombre */}
-          <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent z-20 pointer-events-none" />
         </div>
       </main>
 

@@ -47,17 +47,17 @@ export const InfiniteGrid = ({
         className
       )}
     >
-      {/* Base Grid Layer with top fade-in and very subtle global blur */}
-      <div className="absolute inset-0 z-0 opacity-[0.03] [mask-image:linear-gradient(to_bottom,transparent,black_300px)] blur-[0.5px]">
+      {/* Base Grid Layer unifiée avec masque interne */}
+      <div className="absolute inset-0 z-0 opacity-[0.03] blur-[0.5px]">
         <GridPattern offsetX={gridOffsetX} offsetY={gridOffsetY} />
       </div>
 
-      {/* Reveal Grid Layer with top fade-in, mouse interaction and soft blur */}
+      {/* Reveal Grid Layer unifiée */}
       <motion.div 
-        className="absolute inset-0 z-0 opacity-20 [mask-image:linear-gradient(to_bottom,transparent,black_300px)] blur-[1px]"
+        className="absolute inset-0 z-0 opacity-20 blur-[1px]"
         style={{ 
-          maskImage: useMotionTemplate`radial-gradient(450px circle at ${mouseX}px ${mouseY}px, black, transparent), linear-gradient(to bottom, transparent, black 300px)`,
-          WebkitMaskImage: useMotionTemplate`radial-gradient(450px circle at ${mouseX}px ${mouseY}px, black, transparent), linear-gradient(to bottom, transparent, black 300px)`
+          maskImage: useMotionTemplate`radial-gradient(450px circle at ${mouseX}px ${mouseY}px, black, transparent)`,
+          WebkitMaskImage: useMotionTemplate`radial-gradient(450px circle at ${mouseX}px ${mouseY}px, black, transparent)`
         }}
       >
         <GridPattern offsetX={gridOffsetX} offsetY={gridOffsetY} />
