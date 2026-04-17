@@ -257,23 +257,40 @@ export default function App() {
         {/* CITATION & ROBOT 3D */}
         <section
           id="citation"
-          className="relative py-[30vh] flex items-center overflow-hidden"
+          className="relative py-[40vh] flex items-center overflow-visible"
         >
-          {/* Spline 3D Scene - Absolute overlay */}
-          <div className="absolute top-0 bottom-0 left-0 w-full lg:w-[150%] z-0 pointer-events-auto">
+          {/* Spline 3D Scene - Plus immersive et décalée pour l'équilibre */}
+          <div className="absolute top-0 bottom-0 -right-[10%] w-full lg:w-[130%] z-0 pointer-events-auto">
             <SplineScene
               scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
-              className="w-full h-full transform translate-y-4 md:translate-y-8 transition-transform duration-700"
+              className="w-full h-full transform translate-y-0 transition-transform duration-1000"
             />
           </div>
 
-          <div className="w-[90%] max-w-[1100px] mx-auto relative z-10 flex flex-col md:flex-row items-center gap-12 pointer-events-none">
-            <div className="w-full lg:w-1/2 relative z-20 pr-4 pointer-events-auto">
-              <p className="text-2xl md:text-3xl lg:text-4xl text-textSecondary font-light italic leading-relaxed text-balance">
-                « Se donner les moyens de faire en sorte que l'intérêt de
-                l'enfant soit au cœur des réflexions des adultes, même dans les
-                situations les plus complexes. »
-              </p>
+          <div className="w-[90%] max-w-[1100px] mx-auto relative z-10 flex flex-col md:flex-row items-center pointer-events-none">
+            <div className="w-full lg:w-3/5 relative z-20 pointer-events-auto">
+              <div className="relative p-10 md:p-16 rounded-[40px] bg-white/5 backdrop-blur-[2px] border border-white/10 shadow-2xl overflow-hidden group">
+                {/* Éléments de design : guillemets géants et ligne élégante */}
+                <div className="absolute -top-10 -left-6 text-[15rem] font-serif text-accentPrimary/10 select-none pointer-events-none transition-transform duration-700 group-hover:-translate-y-2">
+                  “
+                </div>
+                
+                <div className="relative z-10">
+                  <div className="w-20 h-[2px] bg-gradient-to-r from-accentPrimary to-transparent mb-12" />
+                  
+                  <p className="text-2xl md:text-4xl text-slate-800 font-light leading-[1.4] text-balance italic">
+                    « Se donner les moyens de faire en sorte que <span className="text-accentPrimary font-normal not-italic">l'intérêt de l'enfant</span> soit au cœur des réflexions des adultes, même dans les situations les plus complexes. »
+                  </p>
+                  
+                  <div className="mt-12 flex items-center gap-4">
+                    <div className="w-8 h-[1px] bg-slate-300" />
+                    <span className="text-sm uppercase tracking-[3px] text-slate-400 font-medium">Engagement & Éthique</span>
+                  </div>
+                </div>
+
+                {/* Reflet lumineux subtil */}
+                <div className="absolute -bottom-[50%] -right-[50%] w-full h-full bg-gradient-to-br from-accentPrimary/5 to-transparent rounded-full blur-3xl pointer-events-none" />
+              </div>
             </div>
           </div>
         </section>
