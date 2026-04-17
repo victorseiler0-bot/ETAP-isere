@@ -38,8 +38,6 @@ export const InfiniteGrid = ({
     gridOffsetY.set((currentY + speedY) % 40);
   });
 
-  const maskImage = useMotionTemplate`radial-gradient(450px circle at ${mouseX}px ${mouseY}px, black, transparent)`;
-
   return (
     <section
       ref={containerRef}
