@@ -257,13 +257,13 @@ export default function App() {
         {/* CITATION & ROBOT 3D */}
         <section
           id="citation"
-          className="relative py-[40vh] flex items-center overflow-visible"
+          className="relative py-[40vh] flex items-center overflow-visible bg-white"
         >
-          {/* Spline 3D Scene - Fixe pour éviter les saccades */}
-          <div className="absolute top-0 bottom-0 -right-[20%] w-[120%] lg:w-[100%] z-0 pointer-events-auto">
+          {/* Spline 3D Scene - Fixe et sans aucune animation pour stabilité maximale */}
+          <div className="absolute top-0 bottom-0 -right-[20%] w-[120%] lg:w-[100%] z-0 pointer-events-none">
             <SplineScene
               scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
-              className="w-full h-full"
+              className="w-full h-full opacity-100"
             />
           </div>
 
