@@ -259,8 +259,8 @@ export default function App() {
           id="citation"
           className="relative py-[40vh] flex items-center overflow-visible"
         >
-          {/* Spline 3D Scene - Plus immersive et décalée pour l'équilibre */}
-          <div className="absolute top-0 bottom-0 -right-[10%] w-full lg:w-[130%] z-0 pointer-events-auto">
+          {/* Spline 3D Scene - Décalée plus à droite pour libérer de l'espace au texte */}
+          <div className="absolute top-0 bottom-0 -right-[25%] md:-right-[15%] w-full lg:w-[130%] z-0 pointer-events-auto">
             <SplineScene
               scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
               className="w-full h-full transform translate-y-0 transition-transform duration-1000"
