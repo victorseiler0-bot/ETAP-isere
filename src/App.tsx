@@ -259,11 +259,11 @@ export default function App() {
           id="citation"
           className="relative py-[40vh] flex items-center overflow-visible"
         >
-          {/* Spline 3D Scene - Décalée plus à droite pour libérer de l'espace au texte */}
-          <div className="absolute top-0 bottom-0 -right-[25%] md:-right-[15%] w-full lg:w-[130%] z-0 pointer-events-auto">
+          {/* Spline 3D Scene - Positionnée à droite avec léger dépassement derrière le texte */}
+          <div className="absolute top-0 bottom-0 right-0 w-full md:w-[60%] lg:w-[50%] z-0 pointer-events-auto">
             <SplineScene
               scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
-              className="w-full h-full transform translate-y-0 transition-transform duration-1000"
+              className="w-full h-full transform translate-x-[10%] md:translate-x-[20%] transition-transform duration-1000"
             />
           </div>
 
