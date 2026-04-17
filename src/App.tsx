@@ -259,11 +259,11 @@ export default function App() {
           id="citation"
           className="relative py-[40vh] flex items-center overflow-visible"
         >
-          {/* Spline 3D Scene - Positionnée à droite et DERRIÈRE le texte avec effet vitre */}
-          <div className="absolute top-0 bottom-0 right-0 w-full md:w-[60%] lg:w-[50%] z-0 pointer-events-auto">
+          {/* Spline 3D Scene - Conteneur élargi pour éviter toute coupure du bras */}
+          <div className="absolute top-0 bottom-0 -right-[20%] w-[120%] lg:w-[100%] z-0 pointer-events-auto">
             <SplineScene
               scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
-              className="w-full h-full transform translate-x-0 md:translate-x-[10%] transition-transform duration-1000"
+              className="w-full h-full transform translate-x-0 transition-transform duration-1000"
             />
           </div>
 
@@ -274,17 +274,24 @@ export default function App() {
                 <div className="absolute -top-10 -left-6 text-[15rem] font-serif text-accentPrimary/10 select-none pointer-events-none transition-transform duration-700 group-hover:-translate-y-2">
                   “
                 </div>
-                
+
                 <div className="relative z-10">
                   <div className="w-20 h-[2px] bg-gradient-to-r from-accentPrimary to-transparent mb-12" />
-                  
+
                   <p className="text-2xl md:text-4xl text-slate-800 font-light leading-[1.4] text-balance italic">
-                    « Se donner les moyens de faire en sorte que <span className="text-accentPrimary font-normal not-italic">l'intérêt de l'enfant</span> soit au cœur des réflexions des adultes, même dans les situations les plus complexes. »
+                    « Se donner les moyens de faire en sorte que{" "}
+                    <span className="text-accentPrimary font-normal not-italic">
+                      l'intérêt de l'enfant
+                    </span>{" "}
+                    soit au cœur des réflexions des adultes, même dans les
+                    situations les plus complexes. »
                   </p>
-                  
+
                   <div className="mt-12 flex items-center gap-4">
                     <div className="w-8 h-[1px] bg-slate-300" />
-                    <span className="text-sm uppercase tracking-[3px] text-slate-400 font-medium">Engagement & Éthique</span>
+                    <span className="text-sm uppercase tracking-[3px] text-slate-400 font-medium">
+                      Engagement & Éthique
+                    </span>
                   </div>
                 </div>
 
@@ -300,11 +307,11 @@ export default function App() {
           id="approche"
           className="relative min-h-screen flex items-center py-[30vh] overflow-hidden"
         >
-          {/* Background Decorative Logo */}
+          {/* Background Decorative Logo - Intensité augmentée */}
           <img
             src="https://static.wixstatic.com/media/6c836c_7847ce0df2334cdaaa5a47c2ae6f7ddc~mv2.png/v1/fill/w_578,h_720,al_c,lg_1,q_90,enc_avif,quality_auto/6c836c_7847ce0df2334cdaaa5a47c2ae6f7ddc~mv2.png"
             alt="Logo décoratif ETAP"
-            className="absolute w-[400px] h-[400px] md:w-[600px] md:h-[600px] top-[10%] -right-[150px] md:-right-[250px] opacity-[0.03] object-contain pointer-events-none transform rotate-12 drop-shadow-2xl"
+            className="absolute w-[400px] h-[400px] md:w-[600px] md:h-[600px] top-[10%] -right-[150px] md:-right-[250px] opacity-[0.08] saturate-[1.2] object-contain pointer-events-none transform rotate-12 drop-shadow-2xl"
           />
           <div className="w-[90%] max-w-[1100px] mx-auto relative z-10">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-16 relative pointer-events-auto">
