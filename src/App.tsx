@@ -259,17 +259,17 @@ export default function App() {
           id="citation"
           className="relative py-[40vh] flex items-center overflow-visible"
         >
-          {/* Spline 3D Scene - Positionnée à droite avec léger dépassement derrière le texte */}
+          {/* Spline 3D Scene - Positionnée à droite et DERRIÈRE le texte avec effet vitre */}
           <div className="absolute top-0 bottom-0 right-0 w-full md:w-[60%] lg:w-[50%] z-0 pointer-events-auto">
             <SplineScene
               scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
-              className="w-full h-full transform translate-x-[10%] md:translate-x-[20%] transition-transform duration-1000"
+              className="w-full h-full transform translate-x-0 md:translate-x-[10%] transition-transform duration-1000"
             />
           </div>
 
           <div className="w-[90%] max-w-[1100px] mx-auto relative z-10 flex flex-col md:flex-row items-center pointer-events-none">
             <div className="w-full lg:w-3/5 relative z-20 pointer-events-auto">
-              <div className="relative p-10 md:p-16 rounded-[40px] bg-white/5 backdrop-blur-[2px] border border-white/10 shadow-2xl overflow-hidden group">
+              <div className="relative p-10 md:p-16 rounded-[40px] bg-white/40 backdrop-blur-[12px] border border-white/40 shadow-2xl overflow-hidden group">
                 {/* Éléments de design : guillemets géants et ligne élégante */}
                 <div className="absolute -top-10 -left-6 text-[15rem] font-serif text-accentPrimary/10 select-none pointer-events-none transition-transform duration-700 group-hover:-translate-y-2">
                   “
