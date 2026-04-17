@@ -166,15 +166,17 @@ export default function App() {
 
   return (
     <div id="top" className="min-h-screen">
-      {/* HEADER */}
-      <header className="sticky top-0 bg-background/95 backdrop-blur-md z-[1000] border-b border-borderColor py-6">
+      {/* HEADER - Glassmorphism "Goutte d'eau" effect */}
+      <header className="sticky top-0 bg-white/40 backdrop-blur-xl z-[1000] border-b border-white/20 py-5 shadow-[0_4px_30px_rgba(0,0,0,0.03)]">
         <div className="w-[90%] max-w-[1100px] mx-auto flex justify-between items-center">
           <a
             href="#top"
-            className="flex items-center gap-3.5 text-accentPrimary"
+            className="flex items-center gap-3.5 text-accentPrimary group"
           >
-            <Logo className="w-8 h-8" />
-            <span className="font-medium text-lg tracking-[1px]">E.T.A.P</span>
+            <Logo className="w-8 h-8 transition-transform duration-500 group-hover:scale-110" />
+            <span className="font-semibold text-lg tracking-[2px] bg-clip-text text-transparent bg-gradient-to-r from-slate-900 to-slate-600">
+              E.T.A.P
+            </span>
           </a>
           <nav className="hidden md:flex gap-10 text-[0.85rem] uppercase tracking-[1px]">
             <a
@@ -319,8 +321,9 @@ export default function App() {
 
         {/* ESPACES & EQUIPE ENVELOPED IN INFINITE GRID */}
         <div className="relative">
-          {/* Seamless white fade transition */}
-          <div className="absolute top-0 left-0 right-0 h-64 bg-gradient-to-b from-white via-white/80 to-transparent z-20 pointer-events-none" />
+          {/* Transition dégradée raccourcie (plus nette) */}
+          <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-white to-transparent z-20 pointer-events-none" />
+
           <InfiniteGrid className="items-stretch justify-start py-0 min-h-0">
             {/* ESPACES */}
             <section
@@ -509,6 +512,9 @@ export default function App() {
               </div>
             </section>
           </InfiniteGrid>
+
+          {/* Effet symétrique en bas : transition vers le blanc avant le footer sombre */}
+          <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent z-20 pointer-events-none" />
         </div>
       </main>
 
