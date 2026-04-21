@@ -24,8 +24,6 @@ const Spline = lazy(() => import("@splinetool/react-spline"));
 
 function SplineScene({ scene, className }: { scene: string; className?: string }) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = React.useState(false);
-
   const lastPointer = useRef({
     x: typeof window !== "undefined" ? window.innerWidth / 2 : 0,
     y: typeof window !== "undefined" ? window.innerHeight / 2 : 0,
@@ -62,25 +60,13 @@ function SplineScene({ scene, className }: { scene: string; className?: string }
 
   return (
     <Suspense fallback={null}>
-      <div
-        ref={containerRef}
-        className={className}
-        style={{
-          opacity: visible ? 1 : 0,
-        }}
-      >
-        <Spline
-          scene={scene}
-          className="w-full h-full"
-          onLoad={() => {
-            // Le dezoom dure ~2s — on attend qu'il soit fini avant de rendre visible
-            setTimeout(() => setVisible(true), 2000);
-          }}
-        />
+      <div ref={containerRef} className={className}>
+        <Spline scene={scene} className="w-full h-full" />
       </div>
     </Suspense>
   );
 }
+
 
 
 // Logo Component
@@ -237,7 +223,7 @@ export default function App() {
           className="relative py-[40vh] flex items-center overflow-visible"
         >
           {/* Robot 3D - animation dentree desactivee via onLoad stop */}
-          <div className="absolute top-0 bottom-0 -right-[20%] w-[120%] lg:w-[100%] z-0 pointer-events-none">
+          <div className="absolute inset-0 z-0 pointer-events-none">
             <SplineScene
               scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
               className="w-full h-full opacity-100"

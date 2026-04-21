@@ -33,3 +33,8 @@ section#equipe {
   border-bottom: 2px solid rgba(0, 0, 0, 0.08);
   margin-bottom: 30px;
 }
+
+/* Prevent horizontal scroll caused by overflowing elements */
+html, body {
+  overflow-x: hidden;
+}
