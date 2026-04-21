@@ -7,3 +7,30 @@
     text-wrap: balance;
   }
 }
+
+/* ============================================
+   SEAMLESS SECTION TRANSITIONS
+   ============================================ */
+
+/* Fade-out subtil au bas de chaque section principale */
+section#hero::after,
+section#citation::after,
+section#approche::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 160px;
+  background: linear-gradient(to bottom, transparent, #ffffff);
+  pointer-events: none;
+  z-index: 15;
+}
+
+/* ============================================
+   EXCEPTION : séparateur unique Équipe → Footer
+   ============================================ */
+section#equipe {
+  border-bottom: 2px solid rgba(0, 0, 0, 0.08);
+  margin-bottom: 30px;
+}

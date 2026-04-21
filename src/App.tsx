@@ -295,11 +295,20 @@ export default function App() {
                   </div>
                 </div>
 
-                {/* Reflet lumineux subtil */}
-                <div className="absolute -bottom-[50%] -right-[50%] w-full h-full bg-gradient-to-br from-accentPrimary/5 to-transparent rounded-full blur-3xl pointer-events-none" />
               </div>
             </div>
           </div>
+          {/* Sphère violette dédiée — non tronquée, chevauche la section suivante */}
+          <div
+            className="absolute left-1/2 -translate-x-1/2 w-[700px] h-[700px] rounded-full pointer-events-none"
+            style={{
+              bottom: "-300px",
+              zIndex: 1,
+              background:
+                "radial-gradient(circle at center, rgba(107,33,168,0.13) 0%, rgba(107,33,168,0.05) 45%, transparent 70%)",
+              filter: "blur(60px)",
+            }}
+          />
         </section>
 
         {/* DETAILS APPROCHE */}
