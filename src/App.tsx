@@ -24,6 +24,8 @@ const Spline = lazy(() => import("@splinetool/react-spline"));
 
 function SplineScene({ scene, className }: { scene: string; className?: string }) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = React.useState(false);
+
   const lastPointer = useRef({
     x: typeof window !== "undefined" ? window.innerWidth / 2 : 0,
     y: typeof window !== "undefined" ? window.innerHeight / 2 : 0,
@@ -59,20 +61,28 @@ function SplineScene({ scene, className }: { scene: string; className?: string }
   }, []);
 
   return (
-    <Suspense fallback={<div className="w-full h-full flex items-center justify-center"><span className="text-textSecondary/50 animate-pulse font-light">Chargement...</span></div>}>
-      <div ref={containerRef} className={className}>
+    <Suspense fallback={null}>
+      <div
+        ref={containerRef}
+        className={className}
+        style={{
+          opacity: visible ? 1 : 0,
+          transition: "opacity 0.6s ease-in-out",
+        }}
+      >
         <Spline
           scene={scene}
           className="w-full h-full"
-          onLoad={(splineApp: any) => {
-            // Stoppe immédiatement l'animation d'entrée (dezoom) sans toucher aux interactions
-            splineApp.stop();
+          onLoad={() => {
+            // Le dezoom dure ~2s — on attend qu'il soit fini avant de rendre visible
+            setTimeout(() => setVisible(true), 2000);
           }}
         />
       </div>
     </Suspense>
   );
 }
+
 
 // Logo Component
 const Logo = ({ className }: { className?: string }) => (
