@@ -67,7 +67,6 @@ function SplineScene({ scene, className }: { scene: string; className?: string }
         className={className}
         style={{
           opacity: visible ? 1 : 0,
-          transition: "opacity 0.6s ease-in-out",
         }}
       >
         <Spline
