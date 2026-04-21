@@ -24,10 +24,13 @@ const Spline = lazy(() => import("@splinetool/react-spline"));
 
 function SplineScene({ scene, className }: { scene: string; className?: string }) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const lastPointer = useRef({
-    x: typeof window !== "undefined" ? window.innerWidth / 2 : 0,
-    y: typeof window !== "undefined" ? window.innerHeight / 2 : 0,
-  });
+function SplineScene({ scene, className }: { scene: string; className?: string }) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const lastPointer = useRef({ x: 0, y: 0 });
+  // Sans ce garde, le listener scroll déclenche un pointermove à (0,0) au
+  // chargement, ce qui force la caméra Spline à animer depuis sa position
+  // par défaut → c'est ça qui produit le dezoom visible au démarrage.
+  const hasMouseMoved = useRef(false);
 
   useEffect(() => {
     const dispatchToCanvas = (clientX: number, clientY: number) => {
@@ -46,10 +49,14 @@ function SplineScene({ scene, className }: { scene: string; className?: string }
       canvas.dispatchEvent(clonedEvent);
     };
     const handleGlobalPointerMove = (e: PointerEvent) => {
+      hasMouseMoved.current = true;
       lastPointer.current = { x: e.clientX, y: e.clientY };
       dispatchToCanvas(e.clientX, e.clientY);
     };
-    const handleScroll = () => dispatchToCanvas(lastPointer.current.x, lastPointer.current.y);
+    const handleScroll = () => {
+      if (!hasMouseMoved.current) return;
+      dispatchToCanvas(lastPointer.current.x, lastPointer.current.y);
+    };
     window.addEventListener("pointermove", handleGlobalPointerMove);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => {
@@ -65,6 +72,8 @@ function SplineScene({ scene, className }: { scene: string; className?: string }
       </div>
     </Suspense>
   );
+}
+
 }
 
 
@@ -223,7 +232,7 @@ export default function App() {
           className="relative py-[40vh] flex items-center overflow-visible"
         >
           {/* Robot 3D - animation dentree desactivee via onLoad stop */}
-          <div className="absolute inset-0 z-0 pointer-events-none">
+          <div className="absolute top-0 bottom-0 -right-[20%] w-[120%] lg:w-[100%] z-0 pointer-events-none">
             <SplineScene
               scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
               className="w-full h-full opacity-100"
