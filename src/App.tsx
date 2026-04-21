@@ -1,5 +1,5 @@
 "use client";
-import React, { Suspense, lazy, useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import {
   motion,
   useScroll,
@@ -19,93 +19,6 @@ const useIsClient = () => {
 function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
-
-// Spline Component
-const Spline = lazy(() => import("@splinetool/react-spline"));
-
-function SplineScene({
-  scene,
-  className,
-}: {
-  scene: string;
-  className?: string;
-}) {
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  const lastPointer = useRef({
-    x: typeof window !== "undefined" ? window.innerWidth / 2 : 0,
-    y: typeof window !== "undefined" ? window.innerHeight / 2 : 0,
-  });
-
-  useEffect(() => {
-    const dispatchToCanvas = (clientX: number, clientY: number) => {
-      if (!containerRef.current) return;
-      const canvas = containerRef.current.querySelector("canvas");
-      if (!canvas) return;
-
-      const rect = canvas.getBoundingClientRect();
-
-      const clonedEvent = new PointerEvent("pointermove", {
-        bubbles: true,
-        cancelable: true,
-        clientX: clientX,
-        clientY: clientY,
-        pointerId: 1,
-        pointerType: "mouse",
-        isPrimary: true,
-      });
-
-      Object.defineProperty(clonedEvent, "offsetX", {
-        get: () => clientX - rect.left,
-      });
-      Object.defineProperty(clonedEvent, "offsetY", {
-        get: () => clientY - rect.top,
-      });
-      Object.defineProperty(clonedEvent, "pageX", {
-        get: () => clientX + window.scrollX,
-      });
-      Object.defineProperty(clonedEvent, "pageY", {
-        get: () => clientY + window.scrollY,
-      });
-
-      canvas.dispatchEvent(clonedEvent);
-    };
-
-    const handleGlobalPointerMove = (e: PointerEvent) => {
-      lastPointer.current = { x: e.clientX, y: e.clientY };
-      dispatchToCanvas(e.clientX, e.clientY);
-    };
-
-    const handleScroll = () => {
-      dispatchToCanvas(lastPointer.current.x, lastPointer.current.y);
-    };
-
-    window.addEventListener("pointermove", handleGlobalPointerMove);
-    window.addEventListener("scroll", handleScroll, { passive: true });
-
-    return () => {
-      window.removeEventListener("pointermove", handleGlobalPointerMove);
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
-  return (
-    <Suspense
-      fallback={
-        <div className="w-full h-full flex items-center justify-center">
-          <span className="text-textSecondary/50 animate-pulse font-light">
-            Chargement de la scène 3D...
-          </span>
-        </div>
-      }
-    >
-      <div ref={containerRef} className={className}>
-        <Spline scene={scene} className="w-full h-full" />
-      </div>
-    </Suspense>
-  );
-}
-
 // Logo Component
 const Logo = ({ className }: { className?: string }) => (
   <img
