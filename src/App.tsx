@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef } from "react";
+import React, { Suspense, lazy, useEffect, useRef } from "react";
 import {
   motion,
   useScroll,
@@ -19,6 +19,61 @@ const useIsClient = () => {
 function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
+// Spline Component
+const Spline = lazy(() => import("@splinetool/react-spline"));
+
+function SplineScene({ scene, className }: { scene: string; className?: string }) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const lastPointer = useRef({
+    x: typeof window !== "undefined" ? window.innerWidth / 2 : 0,
+    y: typeof window !== "undefined" ? window.innerHeight / 2 : 0,
+  });
+
+  useEffect(() => {
+    const dispatchToCanvas = (clientX: number, clientY: number) => {
+      if (!containerRef.current) return;
+      const canvas = containerRef.current.querySelector("canvas");
+      if (!canvas) return;
+      const rect = canvas.getBoundingClientRect();
+      const clonedEvent = new PointerEvent("pointermove", {
+        bubbles: true, cancelable: true, clientX, clientY,
+        pointerId: 1, pointerType: "mouse", isPrimary: true,
+      });
+      Object.defineProperty(clonedEvent, "offsetX", { get: () => clientX - rect.left });
+      Object.defineProperty(clonedEvent, "offsetY", { get: () => clientY - rect.top });
+      Object.defineProperty(clonedEvent, "pageX", { get: () => clientX + window.scrollX });
+      Object.defineProperty(clonedEvent, "pageY", { get: () => clientY + window.scrollY });
+      canvas.dispatchEvent(clonedEvent);
+    };
+    const handleGlobalPointerMove = (e: PointerEvent) => {
+      lastPointer.current = { x: e.clientX, y: e.clientY };
+      dispatchToCanvas(e.clientX, e.clientY);
+    };
+    const handleScroll = () => dispatchToCanvas(lastPointer.current.x, lastPointer.current.y);
+    window.addEventListener("pointermove", handleGlobalPointerMove);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener("pointermove", handleGlobalPointerMove);
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  return (
+    <Suspense fallback={<div className="w-full h-full flex items-center justify-center"><span className="text-textSecondary/50 animate-pulse font-light">Chargement...</span></div>}>
+      <div ref={containerRef} className={className}>
+        <Spline
+          scene={scene}
+          className="w-full h-full"
+          onLoad={(splineApp: any) => {
+            // Stoppe immédiatement l'animation d'entrée (dezoom) sans toucher aux interactions
+            splineApp.stop();
+          }}
+        />
+      </div>
+    </Suspense>
+  );
+}
+
 // Logo Component
 const Logo = ({ className }: { className?: string }) => (
   <img
@@ -172,6 +227,14 @@ export default function App() {
           id="citation"
           className="relative py-[40vh] flex items-center overflow-visible"
         >
+          {/* Robot 3D - animation dentree desactivee via onLoad stop */}
+          <div className="absolute top-0 bottom-0 -right-[20%] w-[120%] lg:w-[100%] z-0 pointer-events-none">
+            <SplineScene
+              scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
+              className="w-full h-full opacity-100"
+            />
+          </div>
+
           <div className="w-[90%] max-w-[1100px] mx-auto relative z-10 flex flex-col md:flex-row items-center pointer-events-none">
             <div className="w-full lg:w-3/5 relative z-20 pointer-events-auto">
               <div className="relative p-10 md:p-16 rounded-[40px] bg-white/40 backdrop-blur-[12px] border border-white/40 shadow-2xl overflow-hidden group">
