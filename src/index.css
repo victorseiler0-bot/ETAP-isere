@@ -12,9 +12,8 @@
    SEAMLESS SECTION TRANSITIONS
    ============================================ */
 
-/* Fade-out subtil au bas de chaque section principale */
+/* Fade-out subtil au bas du hero uniquement */
 section#hero::after,
-section#citation::after,
 section#approche::after {
   content: '';
   position: absolute;
