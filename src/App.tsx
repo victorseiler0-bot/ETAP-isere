@@ -24,30 +24,8 @@ const Spline = lazy(() => import("@splinetool/react-spline"));
 
 function SplineScene({ scene, className }: { scene: string; className?: string }) {
   const containerRef = useRef<HTMLDivElement>(null);
-function SplineScene({ scene, className }: { scene: string; className?: string }) {
-  const containerRef = useRef<HTMLDivElement>(null);
   const lastPointer = useRef({ x: 0, y: 0 });
-  // Sans ce garde, le listener scroll déclenche un pointermove à (0,0) au
-  // chargement, ce qui force la caméra Spline à animer depuis sa position
-  // par défaut → c'est ça qui produit le dezoom visible au démarrage.
   const hasMouseMoved = useRef(false);
-
-  useEffect(() => {
-    const dispatchToCanvas = (clientX: number, clientY: number) => {
-      if (!containerRef.current) return;
-      const canvas = containerRef.current.querySelector("canvas");
-      if (!canvas) return;
-      const rect = canvas.getBoundingClientRect();
-      const clonedEvent = new PointerEvent("pointermove", {
-        bubbles: true, cancelable: true, clientX, clientY,
-        pointerId: 1, pointerType: "mouse", isPrimary: true,
-      });
-      Object.defineProperty(clonedEvent, "offsetX", { get: () => clientX - rect.left });
-      Object.defineProperty(clonedEvent, "offsetY", { get: () => clientY - rect.top });
-      Object.defineProperty(clonedEvent, "pageX", { get: () => clientX + window.scrollX });
-      Object.defineProperty(clonedEvent, "pageY", { get: () => clientY + window.scrollY });
-      canvas.dispatchEvent(clonedEvent);
-    };
     const handleGlobalPointerMove = (e: PointerEvent) => {
       hasMouseMoved.current = true;
       lastPointer.current = { x: e.clientX, y: e.clientY };
@@ -72,8 +50,6 @@ function SplineScene({ scene, className }: { scene: string; className?: string }
       </div>
     </Suspense>
   );
-}
-
 }
 
 
